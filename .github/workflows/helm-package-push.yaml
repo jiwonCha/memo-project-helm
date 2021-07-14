@@ -25,8 +25,6 @@ jobs:
           exec: helm lint ./memo-service
   package-push-helm:
       runs-on: ubuntu-latest
-      env:
-        HELM_EXPERIMENTAL_OCI: 1
       steps:
         - name: AWS Credentials
           uses: aws-actions/configure-aws-credentials@v1
@@ -40,6 +38,7 @@ jobs:
         - uses: actions/checkout@v2
         - name: Package / Push Helm
           env:
+            HELM_EXPERIMENTAL_OCI: 1
             ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
             ECR_REPOSITORY: helm-artifact-repository
           uses: WyriHaximus/github-action-helm3@v2
