@@ -35,21 +35,22 @@ jobs:
         - name: Login to Amazon ECR
           id: login-ecr
           uses: aws-actions/amazon-ecr-login@v1
-        - name: Login Helm Registry
+        - uses: actions/checkout@v2 
+        - name: Login Helm Registry / Package / Push Helm
           env:
             HELM_EXPERIMENTAL_OCI: 1
             ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          run: aws ecr get-login-password  --region ap-northeast-1| helm registry login  --username AWS --password-stdin ${ECR_REGISTRY}
-        - uses: actions/checkout@v2
-        - name: Package / Push Helm
-          env:
-            HELM_EXPERIMENTAL_OCI: 1
-            ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-            ECR_REPOSITORY: helm-artifact-repository
-            USERNAME: ${{ steps.login-ecr.outputs.username }}
-            PASSWORD: ${{ steps.login-ecr.outputs.password }}
-          uses: WyriHaximus/github-action-helm3@v2
-          with:
-            exec: helm chart save ./memo-service ${ECR_REGISTRY}/${ECR_REPOSITORY}:memo-service | helm chart push  ${ECR_REGISTRY}/${ECR_REPOSITORY}:memo-service
+          run: |
+            aws ecr get-login-password  --region ap-northeast-1| helm registry login  --username AWS --password-stdin ${ECR_REGISTRY} |
+            helm chart save ./memo-service ${ECR_REGISTRY}/${ECR_REPOSITORY}:memo-service | helm chart push  ${ECR_REGISTRY}/${ECR_REPOSITORY}:memo-service
+
+        # - name: Package / Push Helm
+        #   env:
+        #     HELM_EXPERIMENTAL_OCI: 1
+        #     ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        #     ECR_REPOSITORY: helm-artifact-repository
+        #     USERNAME: ${{ steps.login-ecr.outputs.username }}
+        #     PASSWORD: ${{ steps.login-ecr.outputs.password }}
+        #   uses: WyriHaximus/github-action-helm3@v2
           
           
