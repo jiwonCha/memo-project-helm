@@ -25,20 +25,27 @@ jobs:
           exec: helm lint ./memo-service
   package-push-helm:
       runs-on: ubuntu-latest
+      env:
+        HELM_EXPERIMENTAL_OCI: 1
       steps:
-        - uses: actions/checkout@v2
-        - name: Package Helm
-          uses:  WyriHaximus/github-action-helm3@v2
-          with:
-            exec: helm package ./memo-service
         - name: AWS Credentials
           uses: aws-actions/configure-aws-credentials@v1
           with:
             aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
             aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
             aws-region: ap-northeast-1
-        - name: Push Helm
-          run : |
+        - name: Login to Amazon ECR
+          id: login-ecr
+          uses: aws-actions/amazon-ecr-login@v1
+        - uses: actions/checkout@v2
+        - name: Package / Push Helm
+          env:
+            ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+            ECR_REPOSITORY: helm-artifact-repository
+          uses: WyriHaximus/github-action-helm3@v2
+          with:
+            exec: helm chart save ./memo-service ${ECR_REGISTRY}/${ECR_REPOSITORY}:memo-service |
+            helm chart push 174420192082.dkr.ecr.ap-northeast-1.amazonaws.com/helm-artifact-repository:memo-service
           
           
  
