@@ -51,7 +51,9 @@ ingress:
   hosts:
     - host: memo-service.local
       paths:
-        - backend: {}
+        - path: /memo-service
+          pathType: ImplementationSpecific
+          backend: {}
 
   tls: []
   #  - secretName: chart-example-tls
