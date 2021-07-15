@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: 174420192082.dkr.ecr.ap-northeast-1.amazonaws.com/docker-artifact-repository
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "memo-service"
 
