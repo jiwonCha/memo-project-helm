@@ -64,7 +64,7 @@ ingress:
 
 env:
 - name: DB_HOST
-  value: "postgresql://postgres:pwpostgres@memo-database.czli2wdj3hbs.ap-northeast-1.rds.amazonaws.com:5432/flaskdatabase"
+  value: "postgresql://postgres:pwpostgres@memo-database.czli2wdj3hbs.ap-northeast-1.rds.amazonaws.com:5432/postgres"
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
