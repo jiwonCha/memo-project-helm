@@ -44,6 +44,9 @@ helm install $NAME ./memo-service --namespace ns-memo-service
 
 In browser, typing the address `http://ec2-18-181-110-180.ap-northeast-1.compute.amazonaws.com:30965/memo-service/memos`.
 
+- Project Page
+
+![image](https://user-images.githubusercontent.com/5278032/126025935-54e5fb78-fb05-4f15-9637-2919a5ae6e97.png)
 
 
 Memo Service is deployed in Amazon EC2 Node. You can access Memo service with this link - [Memo Service](http://ec2-18-181-110-180.ap-northeast-1.compute.amazonaws.com:30965/memo-service/memos)
