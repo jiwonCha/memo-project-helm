@@ -15,14 +15,6 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  lint-helm:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Lint Helm
-        uses: WyriHaximus/github-action-helm3@v2
-        with:
-          exec: helm lint ./memo-service
   package-push-helm:
       runs-on: ubuntu-latest
       steps:
