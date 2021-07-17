@@ -43,12 +43,12 @@ spec:
             valueFrom:
               secretKeyRef:
                 key:  username
-                name: {{ .Release.Name }}-db-auth
+                name: {{ include "memo-service.fullname" . }}-db-auth
           - name: POSTGRESQL_PASS
             valueFrom:
               secretKeyRef:
                 key:  password
-                name: {{ .Release.Name }}-db-auth
+                name: {{ include "memo-service.fullname" . }}-db-auth
           {{- toYaml . | nindent 10 }}
           {{- end }}
           resources:
