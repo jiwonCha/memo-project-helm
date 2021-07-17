@@ -54,7 +54,7 @@ ingress:
   hosts:
     - host:
       paths:
-        - path: /memo-service
+        - path: /memo-service/(.*)
           pathType: ImplementationSpecific
           backend: {}
 
