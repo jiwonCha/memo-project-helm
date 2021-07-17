@@ -48,11 +48,11 @@ ingress:
   enabled: true
   className: nginx
   annotations: 
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/rewrite-target: /$1/$2
   hosts:
     - host:
       paths:
-        - path: /memo-service/(.*)
+        - path: /memo-service/(.*)/(.*)
           pathType: Prefix
           backend: {}
 
