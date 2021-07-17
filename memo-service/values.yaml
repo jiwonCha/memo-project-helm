@@ -65,10 +65,6 @@ ingress:
 env:
 - name: POSTGRESQL_HOST
   value: memo-database.czli2wdj3hbs.ap-northeast-1.rds.amazonaws.com:5432
-- name: POSTGRESQL_USER
-  value: postgres
-- name: POSTGRESQL_PASS
-  value: pwpostgres
 - name: POSTGRESQL_DB
   value: postgres
 resources: {}

@@ -39,6 +39,16 @@ spec:
               protocol: TCP
           {{- with .Values.env }}
           env:
+          - name: POSTGRESQL_USER
+            valueFrom:
+              secretKeyRef:
+                key:  username
+                name: {{ .Release.Name }}-db-auth
+          - name: POSTGRESQL_PASS
+            valueFrom:
+              secretKeyRef:
+                key:  password
+                name: {{ .Release.Name }}-db-auth
           {{- toYaml . | nindent 10 }}
           {{- end }}
           resources:
