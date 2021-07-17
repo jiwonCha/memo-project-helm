@@ -37,18 +37,18 @@ spec:
             - name: http
               containerPort: 5000
               protocol: TCP
-          {{- with .Values.env }}
           env:
           - name: POSTGRESQL_USER
             valueFrom:
               secretKeyRef:
                 key:  username
-                name: {{ include "memo-service.fullname" . }}-db-auth
+                name:  {{ include "memo-service.fullname" . }}-db-auth
           - name: POSTGRESQL_PASS
             valueFrom:
               secretKeyRef:
                 key:  password
-                name: {{ include "memo-service.fullname" . }}-db-auth
+                name:  {{ include "memo-service.fullname" . }}-db-auth
+          {{- with .Values.env }}
           {{- toYaml . | nindent 10 }}
           {{- end }}
           resources:
