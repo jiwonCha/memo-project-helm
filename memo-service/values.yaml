@@ -48,7 +48,7 @@ ingress:
   enabled: true
   className: nginx
   annotations: 
-    nginx.ingress.kubernetes.io/x-forwarded-prefix: "/memo-service"
+    nginx.ingress.kubernetes.io/use-regex: "true"
   hosts:
     - host:
       paths:
